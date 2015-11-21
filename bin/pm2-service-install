@@ -4,7 +4,9 @@
 
 const pm2ws = require('../src/index');
 
-pm2ws.install(function(err) {
-    if(err) throw err;
+pm2ws.install().then(_ => {
     console.log('PM2 service installed and started.');
+}, err => {
+    console.error('ERROR', err);
+    process.exit((err && err.code) || 1);
 });

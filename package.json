@@ -26,15 +26,22 @@
   },
   "homepage": "https://github.com/jon-hall/pm2-windows-service#readme",
   "dependencies": {
+    "co": "^4.6.0",
+    "co-event": "^0.1.0",
     "del": "^2.1.0",
+    "fs-extra": "^0.26.2",
     "is-admin": "^1.0.2",
     "node-windows": "^0.1.10",
-    "pm2": "^0.15.10"
+    "pm2": "^0.15.10",
+    "promisify-node": "^0.3.0"
   },
   "engines": {
     "node": ">=4.0.0"
   },
   "os": [
     "win32"
-  ]
+  ],
+  "devDependencies": {
+    "temp": "^0.8.3"
+  }
 }
