@@ -1,4 +1,3 @@
-// TODO
 'use strict';
 
 const pm2 = require('pm2'),

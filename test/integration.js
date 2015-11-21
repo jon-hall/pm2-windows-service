@@ -15,8 +15,7 @@ const assert = require('assert'),
     sid = get_sid();
 
 co(function*() {
-    // TODO: Copy everything (except'/daemon') from 'src' to temp dir
-    // TODO: Require in src from temp dir, so daemon is built in temp dir and fails won't kill future tests
+    // We deploy everything to a temp dir to avoid creating daemon files in this repo
     let temp_dir = yield mkdir_temp('pm2-windows-service-test');
 
     // Use npm to install ourselves to the temp dir
