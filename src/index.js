@@ -50,6 +50,13 @@ exports.install = function(name, cb) {
             cb(err);
         });
 
+        // Try to kill any existing pm2 daemon before we start the service
+        try {
+            execSync('pm2 kill');
+        } catch(ex) {
+            // PM2 wasn't running, no big deal
+        }
+
         service.install();
     });
 };
