@@ -1,0 +1,39 @@
+{
+  "name": "pm2-windows-service",
+  "version": "0.0.0",
+  "description": "Install PM2 as a service on windows",
+  "main": "src/index.js",
+  "bin": {
+    "pm2-service-install": "bin/pm2-service-install",
+    "pm2-service-uninstall": "bin/pm2-service-uninstall"
+  },
+  "scripts": {
+    "test": "node src/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jon-hall/pm2-windows-service.git"
+  },
+  "keywords": [
+    "pm2",
+    "windows",
+    "service"
+  ],
+  "author": "Jon Hall <jon_hall@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jon-hall/pm2-windows-service/issues"
+  },
+  "homepage": "https://github.com/jon-hall/pm2-windows-service#readme",
+  "dependencies": {
+    "is-admin": "^1.0.2",
+    "node-windows": "^0.1.10",
+    "pm2": "^0.15.10"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "os": [
+    "win32"
+  ]
+}

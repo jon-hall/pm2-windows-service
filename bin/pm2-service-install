@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const pm2ws = require('../src/index');
+
+pm2ws.install(function(err) {
+    if(err) throw err;
+    console.log('PM2 service installed and started.');
+});
