@@ -2,7 +2,7 @@
 
 const path = require('path'),
     fs = require('fs'),
-    isAdmin = require('is-admin'),
+    is_admin = require('is-admin'),
     nodewin = require('node-windows'),
     elevate = nodewin.elevate,
     Service = nodewin.Service,
@@ -126,8 +126,8 @@ function check_platform() {
 }
 
 function admin_warn(cb) {
-    isAdmin(function(err, is_admin) {
-        if(!is_admin) {
+    is_admin(function(err, admin) {
+        if(!admin) {
             console.warn('*** HINT: Run this as administrator to avoid the UAC spam ***');
         }
         cb();
