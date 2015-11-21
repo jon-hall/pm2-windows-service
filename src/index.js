@@ -2,7 +2,9 @@
 
 const path = require('path'),
     fs = require('fs'),
+    execSync = require('child_process').execSync,
     is_admin = require('is-admin'),
+    del = require('del'),
     nodewin = require('node-windows'),
     elevate = nodewin.elevate,
     Service = nodewin.Service,
@@ -79,44 +81,48 @@ exports.uninstall = function(name, cb) {
             // No save file and no name, assume using default ('PM2')
         }
 
-        // HACK: For some reason node-window puts.exe on the end of the service name and it's
-        // only SOMETIMES required to uninstall - try without .exe first, then with, if that fail
         name = name || 'PM2';
 
+        // HACK: For some reason node-window puts.exe on the end of the service name and it's
+        // only SOMETIMES required to uninstall - try without .exe first, then with, if that fails
         try_uninstall(name, function(err) {
             if(err) {
-                try_uninstall(name + '.exe', cb, need_unlink);
+                try_uninstall(name + '.exe', function(err2) {
+                    if(err2) {
+                        cb(err2);
+                    } else {
+                        remove_daemon(cb);
+                    }
+                }, need_unlink);
             } else {
-                cb();
+                remove_daemon(cb);
             }
         }, need_unlink);
     });
 };
 
 function try_uninstall(name, cb, need_unlink) {
-    var service = new Service({
-        name: name,
-        script: path.join(__dirname, 'service.js')
-    });
+    try {
+        execSync('sc query ' + name);
+    } catch(ex) {
+        return cb('Unknown service (' + name + ')');
+    }
 
-    service.once('uninstall', function(err) {
-        if(!err && need_unlink) {
-            // Remove the save file
-            fs.unlinkSync(save_file);
-        }
-
-        cb(err);
-    });
-
-    service.once('stop', function(err) {
-        if(err) {
+    elevate('sc stop "' + name + '"', function(err) {
+        if(err && (err.code != 1062)) {
             cb(err);
         } else {
-            service.uninstall();
+            elevate('sc delete "' + name + '"', function(err2) {
+                cb(err2);
+            });
         }
-    });
+    })
+}
 
-    service.stop();
+// We need to remove the daemon else subsequent installs after an uninstall don't work :(
+function remove_daemon(cb) {
+    del(__dirname + '/daemon').
+        then(_ => cb(), _ => cb('Failed to remove service daemon'));
 }
 
 function check_platform() {
