@@ -3,7 +3,7 @@
 const assert = require('assert'),
     execSync = require('child_process').execSync,
     elevate = require('node-windows').elevate,
-    pm2ws = require('./index'),
+    pm2ws = require('../src/index'),
     randomInt = (n => Math.floor(Math.random() * n)),
     sid = '________-____-4___-x____________'.replace(/(x)?(_)/g, (_, capture1) => {
         return (capture1 ? [8, 9, 'a', 'b'][randomInt(4)] : '') + randomInt(16).toString(16);

@@ -8,7 +8,7 @@
     "pm2-service-uninstall": "bin/pm2-service-uninstall"
   },
   "scripts": {
-    "test": "node src/test.js"
+    "test": "node test/integration.js"
   },
   "repository": {
     "type": "git",
