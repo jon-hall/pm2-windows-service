@@ -9,7 +9,7 @@ const path = require('path'),
     Service = require('node-windows').Service,
     del = require('del'),
     common = require('./common'),
-    save_dir = path.resolve(process.env.APPDATA, 'pm2-window-service'),
+    save_dir = path.resolve(process.env.APPDATA, 'pm2-windows-service'),
     sid_file = path.resolve(save_dir, '.sid');
 
 module.exports = co.wrap(function*(name) {
