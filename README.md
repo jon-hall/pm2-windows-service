@@ -10,9 +10,8 @@ npm i pm2-windows-service -g
 What the PM2 service runs is controlled using the following environment variables:
   - `PM2_SERVICE_SCRIPT` - Specifies a javascript file to run when the service starts (takes precedence over `PM2_SERVICE_CONFIG`).
   - `PM2_SERVICE_CONFIG` - Specifies a json config file to run when the service starts.
-  - `PM2_SERVICE_AUTOSAVE` - If set, the service will automatically call [`pm2 save`](http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/#related-commands) whenever it shuts down.
 
-If neither `PM2_SERVICE_SCRIPT` nor `PM2_SERVICE_CONFIG` are set, then the default behaviour is to call [`pm2 resurrect`](http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/#related-commands) on service startup.
+If neither `PM2_SERVICE_SCRIPT` nor `PM2_SERVICE_CONFIG` are set, then the default behaviour is to call [`pm2 resurrect`](http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/#related-commands) on service startup - when pm2 is running with the list of processes you want launched by the service, use [`pm2 save`](http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/#related-commands) to dump the process list, ready for the service to restore it when it starts.
 
 ### Install and Uninstall the Service
 > TIP: Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs

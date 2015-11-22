@@ -20,26 +20,3 @@ pm2.connect(true, function(err) {
         });
     }
 });
-
-if(!start_script && process.env.PM2_SERVICE_AUTOSAVE) {
-    // If we don't have a start script, and env.PM2_SERVICE_AUTOSAVE is set, try to pm2.dump when the service is closing
-    function on_exit(exit, err) {
-        if(err) {
-            console.error(err.message, err.stack);
-        }
-
-        pm2.dump(function(err2) {
-            if(err2) {
-                console.error(err2.message, err2.stack);
-            }
-
-            if(exit) {
-                process.exit();
-            }
-        });
-    }
-
-    process.on('exit', on_exit.bind(null, false));
-    process.on('SIGINT', on_exit.bind(null, true));
-    process.on('uncaughtException', on_exit.bind(null, true));
-}
