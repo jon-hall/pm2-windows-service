@@ -1,7 +1,7 @@
 'use strict';
 
 const pm2 = require('pm2'),
-    start_script = process.env.PM2_SERVICE_SCRIPT || process.env.PM2_SERVICE_CONFIG;
+    start_script = process.env.PM2_SERVICE_CONFIG || process.env.PM2_SERVICE_SCRIPT;
 
 // NOTE: 'true' means the PM2 daemon exists in this process, so it gets kept alive with us as a Windows service
 pm2.connect(true, function(err) {
