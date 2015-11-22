@@ -10,8 +10,8 @@ npm i pm2-windows-service -g
 While testing this a few caveats have arisen which need to be detailed upfront, as they might well lead to issues, or even be blockers to you using this package:
   - If you run the service under one user account, and then attempt to interact with PM2 from the command line using a different account, you'll find things don't work as expected if the `PM2_HOME` environment variable contains any ["user context" env vars](https://technet.microsoft.com/en-us/library/cc749104.aspx#BKMK_2) (`%APPDATA%`, `%USERPROFILE%` etc.), or if one of the users cannot access the location of `PM2_HOME`.
     - To avoid this problem, either ***set `PM2_HOME` to an absolute path that all potential users (service and CLI) can write to***, *or* ***run the service under the same account as you intend to use the CLI from***.
-  - It also seems PM2 throws an error when you try to use the CLI from a *non-administrative command prompt* when it has been launched as a service, regardless of which user the service runs under (not tested with a non-admin user, yet).
-    - Currently, the workaround for this is, unfortunately, just ***use an administrative command prompt*** if you need to access PM2 via command line when it is running as a service.
+  - It also seems PM2 throws an error when you try to use the CLI from a *non-administrative command prompt* after it has been launched as a service, regardless of which user the service runs under (not tested with a non-admin user, yet).
+    - Currently, the workaround for this, unfortunately, is just ***use an administrative command prompt*** if you need to access PM2 via command line when it is running as a service.
 
 ### Configuration
 What the PM2 service runs is controlled using the following environment variables:
@@ -28,3 +28,7 @@ pm2-service-install
 
 pm2-service-uninstall
 ```
+
+### Logs
+
+The service created by node-windows is currently placed in `<global npm packages directory>/node_modules/pm2-windows-service/src/daemon/`, as such, this is also where you will find the log output from the service, should you need it.
