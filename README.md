@@ -15,6 +15,12 @@ pm2-service-install
 pm2-service-uninstall
 ```
 
+### Quickstart
+*After reading the [caveats section](#caveats)*, use PM2 to start the set of processes that you want the service to restore, and then just do:
+```sh
+pm2 save
+```
+The service will then restart that set of processes when the service is next started (by default this will be on system boot).
 ### **Caveats**
 While testing this a few caveats have arisen which need to be detailed upfront, as they can lead to issues when PM2 is installed as a service:
   - If you run the service under one user account, and then attempt to interact with PM2 from the command line using a different account, you'll find things don't work as expected if the `PM2_HOME` environment variable contains any ["user context" env vars](https://technet.microsoft.com/en-us/library/cc749104.aspx#BKMK_2) (`%APPDATA%`, `%USERPROFILE%` etc.), or if one of the users cannot access the location of `PM2_HOME`.
