@@ -3,9 +3,14 @@
 const path = require('path'),
     pm2 = require('pm2'),
     // TODO: Integration test ';' delimited values!!!
-    // TODO: Remove PM2_SERVICE_CONFIG from docs in favour of single env var which can be mix of scripts and config files
-    start_script = process.env.PM2_SERVICE_SCRIPTS || process.env.PM2_SERVICE_CONFIG,
+    // TODO: [deprecated] Remove support for PM2_SERVICE_SCRIPT and PM2_SERVICE_CONFIG in future
+    start_script = process.env.PM2_SERVICE_SCRIPTS || process.env.PM2_SERVICE_CONFIG || process.env.PM2_SERVICE_SCRIPT,
     json_regex = /\.json$/;
+
+if(!process.env.PM2_SERVICE_SCRIPTS && (process.env.PM2_SERVICE_CONFIG || process.env.PM2_SERVICE_SCRIPT)) {
+    console.warn('[DEPRECATED] "PM2_SERVICE_CONFIG" and "PM2_SERVICE_SCRIPT" have been deprecated in favour of ' +
+        '"PM2_SERVICE_SCRIPTS".');
+}
 
 // NOTE: 'true' means the PM2 daemon exists in this process, so it gets kept alive with us as a Windows service
 pm2.connect(true, function(err) {
