@@ -6,6 +6,8 @@ Allows easily installing and uninstalling [PM2](https://github.com/Unitech/PM2/)
 npm i pm2-windows-service -g
 ```
 
+**NOTE:** pm2-windows-service currently requires node v4.0.0+, if node v0.12.x support is a requirement for you, please post in [this issue](https://github.com/jon-hall/pm2-windows-service/issues/2).
+
 ### Install and Uninstall the Service
 > TIP: Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs
 
