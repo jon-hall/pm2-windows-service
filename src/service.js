@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path'),
-    pm2 = require('pm2'),
+    execSync = require('child_process').execSync,
     // TODO: Integration test ';' delimited values!!!
     // TODO: [deprecated] Remove support for PM2_SERVICE_SCRIPT and PM2_SERVICE_CONFIG in future
     start_script = process.env.PM2_SERVICE_SCRIPTS || process.env.PM2_SERVICE_CONFIG || process.env.PM2_SERVICE_SCRIPT,
@@ -10,6 +10,30 @@ const path = require('path'),
 if(!process.env.PM2_SERVICE_SCRIPTS && (process.env.PM2_SERVICE_CONFIG || process.env.PM2_SERVICE_SCRIPT)) {
     console.warn('[DEPRECATED] "PM2_SERVICE_CONFIG" and "PM2_SERVICE_SCRIPT" have been deprecated in favour of ' +
         '"PM2_SERVICE_SCRIPTS".');
+}
+
+// Try to use the global version of pm2 (first from env, then using npm cli)
+let globals_dir = process.env.PM2_SERVICE_PM2_DIR;
+if(!globals_dir) {
+    try {
+        // Get a string from the buffer and remove the trailing newline
+        globals_dir = execSync('npm get prefix').toString().replace(/\r?\n$/, '');
+    } catch(ex) {
+        // Can't get global version of pm2 :(
+    }
+}
+
+let pm2;
+if(globals_dir) {
+    try {
+        pm2 = require(globals_dir + '/node_modules/pm2');
+    } catch(ex) {
+        // Looks like it didn't work, will just have to carry on with local...
+    }
+}
+
+if(!pm2) {
+    pm2 = require('pm2');
 }
 
 // NOTE: 'true' means the PM2 daemon exists in this process, so it gets kept alive with us as a Windows service
