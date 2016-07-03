@@ -13,20 +13,20 @@ if(!process.env.PM2_SERVICE_SCRIPTS && (process.env.PM2_SERVICE_CONFIG || proces
 }
 
 // Try to use the global version of pm2 (first from env, then using npm cli)
-let globals_dir = process.env.PM2_SERVICE_PM2_DIR;
-if(!globals_dir) {
+let global_pm2_dir = process.env.PM2_SERVICE_PM2_DIR;
+if(!global_pm2_dir) {
     try {
         // Get a string from the buffer and remove the trailing newline
-        globals_dir = execSync('npm get prefix').toString().replace(/\r?\n$/, '');
+        global_pm2_dir = execSync('npm get prefix').toString().replace(/\r?\n$/, '') + '/node_modules/pm2';
     } catch(ex) {
         // Can't get global version of pm2 :(
     }
 }
 
 let pm2;
-if(globals_dir) {
+if(global_pm2_dir) {
     try {
-        pm2 = require(globals_dir + '/node_modules/pm2');
+        pm2 = require(global_pm2_dir);
     } catch(ex) {
         // Looks like it didn't work, will just have to carry on with local...
     }
