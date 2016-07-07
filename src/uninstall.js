@@ -111,7 +111,7 @@ function* poll_for_service_removal(service_name) {
             removed = true;
         }
 
-        yield function thunk(t) { setTimeout(t, KILL_CHECK_DELAY); };
+        yield new Promise(resolve => setTimeout(resolve, KILL_CHECK_DELAY));
     }
 
     return removed;
