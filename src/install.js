@@ -8,7 +8,9 @@ const path = require('path'),
     exec = promisify(require('child_process').exec),
     Service = require('node-windows').Service,
     del = require('del'),
+    inquirer = require('inquirer'),
     common = require('./common'),
+    setup = require('./setup'),
     save_dir = path.resolve(process.env.APPDATA, 'pm2-windows-service'),
     sid_file = path.resolve(save_dir, '.sid');
 
@@ -16,6 +18,17 @@ module.exports = co.wrap(function*(name) {
     common.check_platform();
 
     yield common.admin_warning();
+
+    let setupResponse = yield inquirer.prompt([{
+        type: 'confirm',
+        name: 'performSetup',
+        message: 'Perform environment setup (recommended)?',
+        default: true
+    }]);
+
+    if(setupResponse.performSetup) {
+        yield setup();
+    }
 
     let service = new Service({
         name: name || 'PM2',
