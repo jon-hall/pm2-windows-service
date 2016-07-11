@@ -14,12 +14,14 @@ const path = require('path'),
     save_dir = path.resolve(process.env.APPDATA, 'pm2-windows-service'),
     sid_file = path.resolve(save_dir, '.sid');
 
-module.exports = co.wrap(function*(name) {
+module.exports = co.wrap(function*(name, no_setup) {
     common.check_platform();
 
     yield common.admin_warning();
 
-    let setupResponse = yield inquirer.prompt([{
+    let setupResponse = yield no_setup ? Promise.resolve({
+        performSetup: false
+    }) : inquirer.prompt([{
         type: 'confirm',
         name: 'performSetup',
         message: 'Perform environment setup (recommended)?',

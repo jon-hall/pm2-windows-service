@@ -32,7 +32,7 @@ co(function*() {
     const pm2ws = require(path.resolve(temp_dir, 'node_modules', 'pm2-windows-service'));
 
     console.log('Installing service...');
-    yield pm2ws.install(sid);
+    yield pm2ws.install(sid, true);
 
     // Use node-windows to work out what name it gave the service
     let service = new Service({
