@@ -1,7 +1,8 @@
 'use strict';
 
 const inquirer = require('inquirer'),
-    nodeWindows = require('node-windows');
+    nodeWindows = require('node-windows'),
+    common = require('./common');
 
 module.exports = function() {
     return inquirer.prompt([{
@@ -21,7 +22,7 @@ module.exports = function() {
         type: 'input',
         name: 'PM2_SERVICE_PM2_DIR',
         message: 'Specify the directory containing the pm2 version to be used by the\nservice (setting this up is recommended)',
-        default: process.env.PM2_SERVICE_PM2_DIR || ''
+        default: process.env.PM2_SERVICE_PM2_DIR || common.guess_pm2_global_dir()
     }]).then(do_setup);
 };
 

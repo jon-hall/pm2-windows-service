@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path'),
-    execSync = require('child_process').execSync,
+    common = require('./common'),
     // TODO: Integration test ';' delimited values!!!
     // TODO: [deprecated] Remove support for PM2_SERVICE_SCRIPT and PM2_SERVICE_CONFIG in future
     start_script = process.env.PM2_SERVICE_SCRIPTS || process.env.PM2_SERVICE_CONFIG || process.env.PM2_SERVICE_SCRIPT,
@@ -17,7 +17,7 @@ let global_pm2_dir = process.env.PM2_SERVICE_PM2_DIR;
 if(!global_pm2_dir) {
     try {
         // Get a string from the buffer and remove the trailing newline
-        global_pm2_dir = execSync('npm get prefix').toString().replace(/\r?\n$/, '') + '/node_modules/pm2';
+        global_pm2_dir = common.guess_pm2_global_dir();
     } catch(ex) {
         // Can't get global version of pm2 :(
     }
