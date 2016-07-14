@@ -28,21 +28,20 @@ module.exports = function() {
 
 function do_setup(answers) {
     // Perform setup based on answers object
-    const cmd = Object.keys(answers)
+    const command_promises = Object.keys(answers)
         // Filter out unanswered questions
         .filter(key => !!answers[key])
-        // Convert answers to SETX commands
-        .map(key => `SETX ${key} "${answers[key]}" /m`)
-        .join('&&');
+        // Convert answers to promises resolved/rejected by elevated SETX command executions
+        .map(key => new Promise((resolve, reject) => {
+            nodeWindows.elevate(`SETX ${key} "${answers[key]}" /m`, err => {
+                if(err) {
+                    return reject(err);
+                }
 
-    // Run command from elevated prompt, and return a promise
-    return new Promise((resolve, reject) => {
-        nodeWindows.elevate(cmd, err => {
-            if(err) {
-                return reject(err);
-            }
+                resolve();
+            });
+        }));
 
-            resolve();
-        });
-    });
+    // Return a promise which combines all the commands being executed
+    return Promise.all(command_promises);
 }
