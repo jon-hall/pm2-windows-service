@@ -1,7 +1,7 @@
 'use strict';
 
 const inquirer = require('inquirer'),
-    nodeWindows = require('node-windows'),
+    node_windows = require('node-windows'),
     common = require('./common');
 
 module.exports = function() {
@@ -33,7 +33,7 @@ function do_setup(answers) {
         .filter(key => !!answers[key])
         // Convert answers to promises resolved/rejected by elevated SETX command executions
         .map(key => new Promise((resolve, reject) => {
-            nodeWindows.elevate(`SETX ${key} "${answers[key]}" /m`, err => {
+            node_windows.elevate(`SETX ${key} "${answers[key]}" /m`, err => {
                 if(err) {
                     return reject(err);
                 }

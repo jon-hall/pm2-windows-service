@@ -19,16 +19,16 @@ module.exports = co.wrap(function*(name, no_setup) {
 
     yield common.admin_warning();
 
-    let setupResponse = yield no_setup ? Promise.resolve({
-        performSetup: false
+    let setup_response = yield no_setup ? Promise.resolve({
+        perform_setup: false
     }) : inquirer.prompt([{
         type: 'confirm',
-        name: 'performSetup',
+        name: 'perform_setup',
         message: 'Perform environment setup (recommended)?',
         default: true
     }]);
 
-    if(setupResponse.performSetup) {
+    if(setup_response.perform_setup) {
         yield setup();
     }
 

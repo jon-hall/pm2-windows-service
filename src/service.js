@@ -38,7 +38,7 @@ if(!pm2) {
 
 // NOTE: 'true' means the PM2 daemon exists in this process, so it gets kept alive with us as a Windows service
 pm2.connect(true, function(err) {
-    handleError(err);
+    handle_error(err);
 
     if(!start_script) {
         // No start script so just try and ressurect
@@ -82,11 +82,11 @@ function process_start_script(start_script) {
 
     // Else, try to start the start script (js file or json config)
     pm2.start(start_config, function(err2) {
-        handleError(err2);
+        handle_error(err2);
     });
 }
 
-function handleError(err) {
+function handle_error(err) {
     if(err) {
         if(err instanceof Error) {
             throw err;

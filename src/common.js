@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path'),
-    execSync = require('child_process').execSync,
+    exec_sync = require('child_process').execSync,
     promisify = require('promisify-node'),
     del = require('del'),
     is_admin = require('is-admin');
@@ -31,7 +31,7 @@ exports.guess_pm2_global_dir = function() {
     let dir;
 
     try {
-        dir = execSync('npm get prefix').toString().replace(/\r?\n$/, '') + '/node_modules/pm2';
+        dir = exec_sync('npm get prefix').toString().replace(/\r?\n$/, '') + '/node_modules/pm2';
     } catch(ex) {
         // Ignore error, just return undefined
     }
