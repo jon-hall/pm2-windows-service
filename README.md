@@ -16,6 +16,7 @@ pm2-service-install [-n <service name>]
 
 pm2-service-uninstall
 ```
+The install command also offers to perform some basic setup for you which helps address some of the [caveats](#caveats) detailed below.
 
 ### Quickstart
 *After reading the [caveats section](#caveats)*, use PM2 to start the set of processes that you want the service to restore, and then just do:
