@@ -1,7 +1,8 @@
 'use strict';
 
 const inquirer = require('inquirer'),
-    nodeWindows = require('node-windows');
+    node_windows = require('node-windows'),
+    common = require('./common');
 
 module.exports = function() {
     return inquirer.prompt([{
@@ -21,27 +22,26 @@ module.exports = function() {
         type: 'input',
         name: 'PM2_SERVICE_PM2_DIR',
         message: 'Specify the directory containing the pm2 version to be used by the\nservice (setting this up is recommended)',
-        default: process.env.PM2_SERVICE_PM2_DIR || ''
+        default: process.env.PM2_SERVICE_PM2_DIR || common.guess_pm2_global_dir()
     }]).then(do_setup);
 };
 
 function do_setup(answers) {
     // Perform setup based on answers object
-    const cmd = Object.keys(answers)
+    const command_promises = Object.keys(answers)
         // Filter out unanswered questions
         .filter(key => !!answers[key])
-        // Convert answers to SETX commands
-        .map(key => `SETX ${key} "${answers[key]}" /m`)
-        .join('&&');
+        // Convert answers to promises resolved/rejected by elevated SETX command executions
+        .map(key => new Promise((resolve, reject) => {
+            node_windows.elevate(`SETX ${key} "${answers[key]}" /m`, err => {
+                if(err) {
+                    return reject(err);
+                }
 
-    // Run command from elevated prompt, and return a promise
-    return new Promise((resolve, reject) => {
-        nodeWindows.elevate(cmd, err => {
-            if(err) {
-                return reject(err);
-            }
+                resolve();
+            });
+        }));
 
-            resolve();
-        });
-    });
+    // Return a promise which combines all the commands being executed
+    return Promise.all(command_promises);
 }
