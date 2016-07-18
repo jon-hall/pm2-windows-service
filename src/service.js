@@ -16,10 +16,13 @@ if(!process.env.PM2_SERVICE_SCRIPTS && (process.env.PM2_SERVICE_CONFIG || proces
 let global_pm2_dir = process.env.PM2_SERVICE_PM2_DIR;
 if(!global_pm2_dir) {
 
-	var fs = require('fs')
-	var path = require('path')
-	var which = require('which')
-	global_pm2_dir = fs.realpathSync(which.sync('pm2'))
+	var shell = require('shelljs');
+	if (!shell.which('pm2')) {
+	  console.error('Sorry, this script requires pm2');
+	  exit(1);
+	}
+
+	global_pm2_dir = fs.realpathSync(shell.which('pm2').stdout);
 	global_pm2_dir = path.join(global_pm2_dir, "..", "node_modules", "pm2", "index.js" );
 
 }
@@ -29,7 +32,8 @@ if(global_pm2_dir) {
     try {
         pm2 = require(global_pm2_dir);
     } catch(ex) {
-        // Looks like it didn't work, will just have to carry on with local...
+        console.error('Sorry, this script requires pm2');
+	  	exit(1);
     }
 }
 
