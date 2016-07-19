@@ -1,6 +1,8 @@
 'use strict';
-const path = require('path'),
+const fs = require('fs'),
+    path = require('path'),
     exec_sync = require('child_process').execSync,
+    shell = require('shelljs'),
     promisify = require('promisify-node'),
     del = require('del'),
     is_admin = require('is-admin');
@@ -31,7 +33,11 @@ exports.guess_pm2_global_dir = function() {
     let dir;
 
     try {
-        dir = exec_sync('npm get prefix').toString().replace(/\r?\n$/, '') + '/node_modules/pm2';
+        // Use 'which' to find pmd 'executable'
+        dir = fs.realpathSync(shell.which('pm2').stdout);
+
+        // Then resolve to the pm2 directory from there
+        dir = path.join(dir, '..', 'node_modules', 'pm2', 'index.js' );
     } catch(ex) {
         // Ignore error, just return undefined
     }

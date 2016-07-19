@@ -15,10 +15,7 @@ if(!process.env.PM2_SERVICE_SCRIPTS && (process.env.PM2_SERVICE_CONFIG || proces
 // Try to use the global version of pm2 (first from env, then using npm cli)
 let global_pm2_dir = process.env.PM2_SERVICE_PM2_DIR;
 if(!global_pm2_dir) {
-    var shell = require('shelljs');
-    var fs = require('fs');
-	global_pm2_dir = fs.realpathSync(shell.which('pm2').stdout);
-	global_pm2_dir = path.join(global_pm2_dir, "..", "node_modules", "pm2", "index.js" );
+	global_pm2_dir = common.guess_pm2_global_dir();
 }
 
 let pm2;
