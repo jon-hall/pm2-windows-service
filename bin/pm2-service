@@ -1,0 +1,5 @@
+#!node --harmony
+
+'use strict';
+
+// TODO: Proxy args to pm2 using nodeWindows.elevate

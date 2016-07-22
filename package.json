@@ -4,6 +4,7 @@
   "description": "Install PM2 as a service on windows",
   "main": "src/index.js",
   "bin": {
+    "pm2-service": "bin/pm2-service",
     "pm2-service-install": "bin/pm2-service-install",
     "pm2-service-uninstall": "bin/pm2-service-uninstall"
   },
