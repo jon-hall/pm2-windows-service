@@ -1,5 +1,10 @@
 #!node --harmony
 
 'use strict';
+const node_windows = require('node-windows');
 
-// TODO: Proxy args to pm2 using nodeWindows.elevate
+// TODO: Rather than just running as admin, this should run as the correct service user when
+// this library supports configuring the service user
+
+// Proxy args to pm2 using nodeWindows.elevate
+node_windows.elevate('pm2 ' + process.argv.slice(2).join(' ')));
