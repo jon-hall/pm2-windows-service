@@ -1,10 +1,18 @@
 #!node --harmony
 
 'use strict';
-const node_windows = require('node-windows');
+const spawn = require('child_process').spawn,
+    path = require('path'),
+    node_windows_entry = require.resolve('node-windows'),
+    node_windows_bin_dir = path.resolve(path.dirname(node_windows_entry), '../bin'),
+    // TODO: PR/fork node-windows to use spawn, so we can receive stdout from elevated cmds, this is
+    // a quick fix of copying much of the internals of node-windows' elevate command
+    elevate_cmd = '"' + path.join(node_windows_bin_dir, 'elevate', 'elevate.cmd') + '"';
 
 // TODO: Rather than just running as admin, this should run as the correct service user when
 // this library supports configuring the service user
 
 // Proxy args to pm2 using nodeWindows.elevate
-node_windows.elevate('pm2 ' + process.argv.slice(2).join(' ')));
+const pm2_proc = spawn(elevate_cmd + ' ' + ['pm2'].concat(process.argv.slice(2)).join(' '));
+pm2_proc.stdout.pipe(process.stdout);
+pm2_proc.stderr.pipe(process.stderr);
