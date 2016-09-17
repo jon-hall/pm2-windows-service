@@ -33,7 +33,7 @@
     "fs-extra": "^0.26.2",
     "inquirer": "^1.1.2",
     "is-admin": "^1.0.2",
-    "node-windows": "^0.1.10",
+    "node-windows": "jon-hall/node-windows",
     "promisify-node": "^0.3.0",
     "rc": "^1.1.6",
     "shelljs": "^0.7.0",

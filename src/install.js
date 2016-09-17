@@ -28,6 +28,15 @@ module.exports = co.wrap(function*(name, config) {
         script: path.join(__dirname, 'service.js')
     });
 
+    // TODO: This sets up the service under a user, but for accounts with low permissions (e.g.
+    // LOCAL SERVICE etc.) - the service cannot be started without modifying permissions on various
+    // objects - really we should be doing that for the user where possible...
+    if(config.SET_SERVICE_USER) {
+        service.user.domain = config.SERVICE_USER_DOMAIN;
+        service.user.account = config.SERVICE_USER_NAME;
+        service.user.password = config.SERVICE_USER_PASSWORD;
+    }
+
     // Let this throw if we can't remove previous daemon
     try {
         yield common.remove_previous_daemon(service);

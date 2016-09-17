@@ -13,6 +13,35 @@ exports.retrieve = function() {
     }]).then(answers => answers.perform_setup ?
         inquirer.prompt([{
             type: 'confirm',
+            name: 'SET_SERVICE_USER',
+            message: 'Set the user that the service will run under (default: NT AUTHORITY\\LOCAL SYSTEM)?',
+            default: false
+        }, {
+            type: 'input',
+            name: 'SERVICE_USER_DOMAIN',
+            message: 'Enter the domain of the service user to use ("NT AUTHORITY" for built-in accounts, "." for other local accounts)',
+            default: 'NT AUTHORITY',
+            when(answers) {
+                return answers.SET_SERVICE_USER;
+            }
+        }, {
+            type: 'input',
+            name: 'SERVICE_USER_NAME',
+            message: 'Enter the username of the service user to use (e.g. "LOCAL SERVICE", or "MyUsername")',
+            default: 'LOCAL SERVICE',
+            when(answers) {
+                return answers.SET_SERVICE_USER;
+            }
+        }, {
+            type: 'input',
+            name: 'SERVICE_USER_PASSWORD',
+            message: 'Enter the password of the service user to use (this should be left empty for built-in accounts)',
+            default: '',
+            when(answers) {
+                return answers.SET_SERVICE_USER;
+            }
+        }, {
+            type: 'confirm',
             name: 'SET_PM2_HOME',
             message: 'Set PM2_HOME?'
         }, {
