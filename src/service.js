@@ -1,16 +1,31 @@
 'use strict';
 
-const path = require('path'),
+const os = require('os'),
+    path = require('path'),
+    winston = require('winston'),
     common = require('./common'),
     // TODO: Integration test ';' delimited values!!!
     // TODO: [deprecated] Remove support for PM2_SERVICE_SCRIPT and PM2_SERVICE_CONFIG in future
     start_script = process.env.PM2_SERVICE_SCRIPTS || process.env.PM2_SERVICE_CONFIG || process.env.PM2_SERVICE_SCRIPT,
     json_regex = /\.json$/;
 
+// TODO: Proper log configuration
+winston.configure({
+  transports: [
+    new (winston.transports.File)({ filename: 'C:/logs/pm2-windows-service.log' })
+  ]
+});
+
 if(!process.env.PM2_SERVICE_SCRIPTS && (process.env.PM2_SERVICE_CONFIG || process.env.PM2_SERVICE_SCRIPT)) {
     console.warn('[DEPRECATED] "PM2_SERVICE_CONFIG" and "PM2_SERVICE_SCRIPT" have been deprecated in favour of ' +
         '"PM2_SERVICE_SCRIPTS".');
 }
+
+// TODO: Change this to debug/trace logging
+// Log some useful debug info
+winston.info('ENV', { env: process.env });
+winston.info('homedir', { homedir: os.homedir() });
+winston.info('userinfo', { userinfo: os.userInfo() });
 
 // Try to use the global version of pm2 (first from env, then using npm cli)
 let global_pm2_dir = process.env.PM2_SERVICE_PM2_DIR;
