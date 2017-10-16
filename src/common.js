@@ -33,7 +33,7 @@ exports.guess_pm2_global_dir = function() {
     let dir;
 
     try {
-        // Use 'which' to find pmd 'executable'
+        // Use 'which' to find pm2 'executable'
         dir = fs.realpathSync(shell.which('pm2').stdout);
 
         // Then resolve to the pm2 directory from there
