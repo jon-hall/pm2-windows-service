@@ -12,7 +12,7 @@ npm i pm2-windows-service -g
 > TIP: Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs
 
 ```sh
-pm2-service-install [-n <service name>]
+pm2-service-install [-n <service name>] [--unattended]
 
 pm2-service-uninstall
 ```
