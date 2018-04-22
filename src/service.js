@@ -59,7 +59,7 @@ function process_start_script(start_script) {
         try {
             start_config = require(start_script);
         } catch(ex) {
-            throw new Error('Unable to load PM2 JSON configuration file (' + start_script + ')');
+            throw new Error('Unable to load PM2 JSON configuration file (' + start_script + ') due to the following error: ' + ex);
         }
 
         // PM2 app declarations can be an array or an object with an 'apps' node

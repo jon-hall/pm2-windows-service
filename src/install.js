@@ -14,7 +14,7 @@ const path = require('path'),
     save_dir = path.resolve(process.env.APPDATA, 'pm2-windows-service'),
     sid_file = path.resolve(save_dir, '.sid');
 
-module.exports = co.wrap(function*(name, no_setup) {
+module.exports = co.wrap(function*(name, description, no_setup) {
     common.check_platform();
 
     yield common.admin_warning();
@@ -34,6 +34,7 @@ module.exports = co.wrap(function*(name, no_setup) {
 
     let service = new Service({
         name: name || 'PM2',
+        description: description,
         script: path.join(__dirname, 'service.js')
     });
 

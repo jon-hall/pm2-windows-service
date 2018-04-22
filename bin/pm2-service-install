@@ -3,13 +3,14 @@
 'use strict';
 
 const args = require('yargs')
-        .usage('Usage: $0 [-n <service name>] [--unattended]')
+        .usage('Usage: $0 [-n <service name>] [-d <service description>] [--unattended]')
         .alias('n', 'name')
+        .alias('d', 'description')
         .alias('u', 'unattended')
         .argv,
     pm2ws = require('../src/index');
 
-pm2ws.install(args.name, args.unattended).then(_ => {
+pm2ws.install(args.name, args.description, args.unattended).then(_ => {
     console.log('PM2 service installed and started.');
 }, err => {
     console.error('ERROR', err);
