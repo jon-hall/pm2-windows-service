@@ -99,8 +99,10 @@ process.on('message', m => {
 		
 		console.log('force shutdown fix');
 		
-		pm2.killDaemon(function err() { 
-			console.log(err);
-		});
+	    	if (pm2) {
+			pm2.killDaemon(function(err, apps) { 
+				console.log(err, apps);
+			});
+		}
     }
 });
