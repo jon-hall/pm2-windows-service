@@ -92,3 +92,17 @@ function handle_error(err) {
         throw new Error(JSON.stringify(err));
     }
 }
+
+process.on('message', m => {
+	
+    if (m == 'shutdown') {
+		
+		console.log('force shutdown fix');
+		
+	    	if (pm2) {
+			pm2.killDaemon(function(err, apps) { 
+				console.log(err, apps);
+			});
+		}
+    }
+});
