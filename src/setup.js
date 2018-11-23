@@ -7,7 +7,7 @@ const inquirer = require('inquirer'),
 module.exports = function() {
     return inquirer.prompt([{
         type: 'confirm',
-        name: 'SET_PM2_HOME',
+        name: 'SET_PM2_HOME2',
         message: 'Set PM2_HOME?'
     }, {
         // Offer to update PM2_HOME
@@ -16,11 +16,11 @@ module.exports = function() {
         message: 'PM2_HOME value (this path should be accessible to the service user and\nshould not contain any "user-context" variables [e.g. %APPDATA%]):',
         default: process.env.PM2_HOME || '',
         when(answers) {
-            return answers.SET_PM2_HOME;
+            return answers.SET_PM2_HOME2;
         }
     }, {
         type: 'confirm',
-        name: 'SET_PM2_SERVICE_SCRIPTS',
+        name: 'SET_PM2_SERVICE_SCRIPTS2',
         message: 'Set PM2_SERVICE_SCRIPTS (the list of start-up scripts for pm2)?'
     }, {
         // Set PM2_SERVICE_SCRIPTS up (optional)
@@ -29,11 +29,11 @@ module.exports = function() {
         message: 'Set the list of startup scripts/files (semi-colon separated json config\nfiles or js files)',
         default: process.env.PM2_SERVICE_SCRIPTS || '',
         when(answers) {
-            return answers.SET_PM2_SERVICE_SCRIPTS;
+            return answers.SET_PM2_SERVICE_SCRIPTS2;
         }
     }, {
         type: 'confirm',
-        name: 'SET_PM2_SERVICE_PM2_DIR',
+        name: 'SET_PM2_SERVICE_PM2_DIR2',
         message: 'Set PM2_SERVICE_PM2_DIR (the location of the global pm2 to use with the service)? [recommended]'
     }, {
         // Set PM2_SERVICE_PM2_DIR up, to support using global pm2 version (non-optional?)
@@ -42,7 +42,7 @@ module.exports = function() {
         message: 'Specify the directory containing the pm2 version to be used by the\nservice',
         default: process.env.PM2_SERVICE_PM2_DIR || common.guess_pm2_global_dir(),
         when(answers) {
-            return answers.SET_PM2_SERVICE_PM2_DIR;
+            return answers.SET_PM2_SERVICE_PM2_DIR2;
         }
     }]).then(do_setup);
 };
