@@ -18,7 +18,6 @@ module.exports = co.wrap(function*(name, no_setup) {
     common.check_platform();
 
     yield common.admin_warning();
-
     let setup_response = yield no_setup ? Promise.resolve({
         perform_setup: false
     }) : inquirer.prompt([{
@@ -27,7 +26,6 @@ module.exports = co.wrap(function*(name, no_setup) {
         message: 'Perform environment setup (recommended)?',
         default: true
     }]);
-
     if(setup_response.perform_setup) {
         yield setup();
     }
