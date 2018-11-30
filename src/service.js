@@ -23,7 +23,7 @@ if(global_pm2_dir) {
     try {
         pm2 = require(global_pm2_dir);
     } catch(ex) {
-        console.error('Sorry, this script requires pm2');
+        console.error('ERROR', err);
 	  	process.exit(1);
     }
 }
