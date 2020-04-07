@@ -1,46 +1,52 @@
-'use strict';
-const fs = require('fs'),
-    path = require('path'),
-    exec_sync = require('child_process').execSync,
-    shell = require('shelljs'),
-    promisify = require('util').promisify || require('promisify-node'),
-    del = require('del'),
-    is_admin = require('is-admin');
+const fs = require('fs');
+const path = require('path');
+const shell = require('shelljs');
+const promisify = require('promisify-node');
+const del = require('del');
+const isAdmin = require('is-admin');
 
-exports.check_platform = function() {
-    if(!/^win/.test(process.platform)) {
-        throw new Error('pm2-windows-service has to be run on Windows...');
-    }
+exports.check_platform = () => {
+	if (!/^win/.test(process.platform)) {
+		throw new Error('pm2-windows-service has to be run on Windows...');
+	}
 };
 
-exports.admin_warning = function() {
-    return promisify(is_admin)().
-        then(admin => {
-            if(!admin) {
-                console.warn('*** HINT: Run this as administrator to avoid the UAC spam ***');
-            }
-        }, _ => {
-            console.warn('*** HINT: Run this as administrator to avoid the UAC spam ***');
-            // Don't re-throw, we just assume they aren't admin if it errored
-        });
+exports.admin_warning = () => {
+	return promisify(isAdmin)().then(
+		(admin) => {
+			if (!admin) {
+				console.warn(
+					'*** HINT: Run this as administrator to avoid the UAC spam ***'
+				);
+			}
+		},
+		() => {
+			console.warn(
+				'*** HINT: Run this as administrator to avoid the UAC spam ***'
+			);
+			// Don't re-throw, we just assume they aren't admin if it errored
+		}
+	);
 };
 
-exports.remove_previous_daemon = function(service) {
-    return del(path.resolve(__dirname, 'daemon', service.id + '.*'), { force: true });
-}
+exports.remove_previous_daemon = (service) => {
+	return del(path.resolve(__dirname, 'daemon', `${service.id}.*`), {
+		force: true
+	});
+};
 
-exports.guess_pm2_global_dir = function() {
-    let dir;
+exports.guess_pm2_global_dir = () => {
+	let dir;
 
-    try {
-        // Use 'which' to find pm2 'executable'
-        dir = fs.realpathSync(shell.which('pm2').stdout);
+	try {
+		// Use 'which' to find pm2 'executable'
+		dir = fs.realpathSync(shell.which('pm2').stdout);
 
-        // Then resolve to the pm2 directory from there
-        dir = path.join(dir, '..', 'node_modules', 'pm2', 'index.js' );
-    } catch(ex) {
-        // Ignore error, just return undefined
-    }
+		// Then resolve to the pm2 directory from there
+		dir = path.join(dir, '..', 'node_modules', 'pm2', 'index.js');
+	} catch (ex) {
+		// Ignore error, just return undefined
+	}
 
-    return dir;
+	return dir;
 };

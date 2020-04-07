@@ -1,10 +1,8 @@
 #!node --harmony
 
-'use strict';
-
 const pm2ws = require('../src/index');
 
-pm2ws.uninstall().then(_ => {
+pm2ws.uninstall().then( () => {
     console.log('PM2 service uninstalled.');
 }, err => {
     console.error('ERROR', err);

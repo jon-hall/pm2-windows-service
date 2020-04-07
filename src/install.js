@@ -1,88 +1,92 @@
-'use strict';
+const path = require('path');
+const co = require('co');
+const event = require('co-event');
+const promisify = require('promisify-node');
+const fsx = require('fs-extra');
+const exec = promisify(require('child_process').exec);
+const Service = require('node-windows').Service;
+const inquirer = require('inquirer');
+const common = require('./common');
+const setup = require('./setup');
 
-const path = require('path'),
-    co = require('co'),
-    event = require('co-event'),
-    promisify = require('util').promisify || require('promisify-node'),
-    fsx = require('fs-extra'),
-    exec = promisify(require('child_process').exec),
-    Service = require('node-windows').Service,
-    del = require('del'),
-    inquirer = require('inquirer'),
-    common = require('./common'),
-    setup = require('./setup'),
-    save_dir = path.resolve(process.env.APPDATA, 'pm2-windows-service'),
-    sid_file = path.resolve(save_dir, '.sid');
+const saveDir = path.resolve(process.env.APPDATA, 'pm2-windows-service');
+const sidFile = path.resolve(saveDir, '.sid');
 
-module.exports = co.wrap(function*(name, no_setup) {
-    common.check_platform();
+function* saveSidFile(name) {
+	if (name) {
+		// Save name to %APPDATA%/pm2-windows-service/.sid, if supplied
+		yield fsx.outputFile(sidFile, name);
+	}
+}
 
-    yield common.admin_warning();
+function* killExistingPm2Daemon() {
+	try {
+		yield exec('pm2 kill');
+	} catch (ex) {
+		// PM2 daemon wasn't running, no big deal
+	}
+}
 
-    let setup_response = yield no_setup ? Promise.resolve({
-        perform_setup: false
-    }) : inquirer.prompt([{
-        type: 'confirm',
-        name: 'perform_setup',
-        message: 'Perform environment setup (recommended)?',
-        default: true
-    }]);
+function* installAndStartService(service) {
+	// Make sure we kick off the install events on next tick BEFORE we yield
+	setImmediate(() => service.install());
 
-    if(setup_response.perform_setup) {
-        yield setup();
-    }
+	// Now yield on install/alreadyinstalled/start events
+	let e;
+	while ((e = yield event(service))) {
+		switch (e.type) {
+			case 'alreadyinstalled':
+			case 'install':
+				service.start();
+				break;
+			case 'start':
+			default:
+				return;
+		}
+	}
+}
 
-    let service = new Service({
-        name: name || 'PM2',
-        script: path.join(__dirname, 'service.js')
-    });
+module.exports = co.wrap(function* (name, noSetup) {
+	common.check_platform();
 
-    // Let this throw if we can't remove previous daemon
-    try {
-        yield common.remove_previous_daemon(service);
-    } catch(ex) {
-        throw new Error('Previous daemon still in use, please stop or uninstall existing service before reinstalling.');
-    }
+	yield common.admin_warning();
 
-    // NOTE: We don't do (name = name || 'PM2') above so we don't end up
-    // writing out a sid_file for default name
-    yield* save_sid_file(name);
+	const setupResponse = yield noSetup
+		? Promise.resolve({
+				perform_setup: false
+		  })
+		: inquirer.prompt([
+				{
+					type: 'confirm',
+					name: 'perform_setup',
+					message: 'Perform environment setup (recommended)?',
+					default: true
+				}
+		  ]);
 
-    yield* kill_existing_pm2_daemon();
+	if (setupResponse.perform_setup) {
+		yield setup();
+	}
 
-    yield* install_and_start_service(service);
+	const service = new Service({
+		name: name || 'PM2',
+		script: path.join(__dirname, 'service.js')
+	});
+
+	// Let this throw if we can't remove previous daemon
+	try {
+		yield common.remove_previous_daemon(service);
+	} catch (ex) {
+		throw new Error(
+			'Previous daemon still in use, please stop or uninstall existing service before reinstalling.'
+		);
+	}
+
+	// NOTE: We don't do (name = name || 'PM2') above so we don't end up
+	// writing out a sidFile for default name
+	yield* saveSidFile(name);
+
+	yield* killExistingPm2Daemon();
+
+	yield* installAndStartService(service);
 });
-
-function* save_sid_file(name) {
-    if(name) {
-        // Save name to %APPDATA%/pm2-windows-service/.sid, if supplied
-        yield fsx.outputFile(sid_file, name);
-    }
-}
-
-function* kill_existing_pm2_daemon() {
-    try {
-        yield exec('pm2 kill');
-    } catch (ex) {
-        // PM2 daemon wasn't running, no big deal
-    }
-}
-
-function* install_and_start_service(service) {
-    // Make sure we kick off the install events on next tick BEFORE we yield
-    setImmediate(_ => service.install());
-
-    // Now yield on install/alreadyinstalled/start events
-    let e;
-    while (e = yield event(service)) {
-        switch (e.type) {
-            case 'alreadyinstalled':
-            case 'install':
-                service.start();
-                break;
-
-            case 'start':
-                return;
-        }
-    }
-}
