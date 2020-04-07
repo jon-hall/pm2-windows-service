@@ -1,15 +1,13 @@
 #!node --harmony
 
-'use strict';
-
 const args = require('yargs')
         .usage('Usage: $0 [-n <service name>] [--unattended]')
         .alias('n', 'name')
         .alias('u', 'unattended')
-        .argv,
-    pm2ws = require('../src/index');
+        .argv;
+const pm2ws = require('../src/index');
 
-pm2ws.install(args.name, args.unattended).then(_ => {
+pm2ws.install(args.name, args.unattended).then( () => {
     console.log('PM2 service installed and started.');
 }, err => {
     console.error('ERROR', err);
