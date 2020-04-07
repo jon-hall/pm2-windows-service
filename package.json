@@ -8,6 +8,7 @@
     "pm2-service-uninstall": "bin/pm2-service-uninstall"
   },
   "scripts": {
+    "lint": "eslint *",
     "test": "node test/integration.js"
   },
   "repository": {
@@ -25,6 +26,16 @@
     "url": "https://github.com/jon-hall/pm2-windows-service/issues"
   },
   "homepage": "https://github.com/jon-hall/pm2-windows-service#readme",
+  "prettier": {
+		"arrowParens": "always",
+		"bracketSpacing": true,
+		"endOfLine": "lf",
+		"semi": true,
+		"singleQuote": true,
+		"tabWidth": 4,
+		"trailingComma": "none",
+		"useTabs": true
+	},
   "dependencies": {
     "co": "^4.6.0",
     "co-event": "^0.1.0",
@@ -44,6 +55,13 @@
     "win32"
   ],
   "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-json": "^2.1.1",
+    "prettier": "2.0.2",
     "temp": "^0.9.1"
   }
 }
