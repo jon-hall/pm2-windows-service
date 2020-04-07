@@ -1,32 +1,35 @@
 {
-  "name": "pm2-windows-service",
-  "version": "0.2.1",
-  "description": "Install PM2 as a service on windows",
-  "main": "src/index.js",
-  "bin": {
-    "pm2-service-install": "bin/pm2-service-install",
-    "pm2-service-uninstall": "bin/pm2-service-uninstall"
-  },
-  "scripts": {
-    "lint": "eslint *",
-    "test": "node test/integration.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jon-hall/pm2-windows-service.git"
-  },
-  "keywords": [
-    "pm2",
-    "windows",
-    "service"
-  ],
-  "author": "Jon Hall <jon_hall@outlook.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jon-hall/pm2-windows-service/issues"
-  },
-  "homepage": "https://github.com/jon-hall/pm2-windows-service#readme",
-  "prettier": {
+	"name": "pm2-windows-service",
+	"version": "0.2.1",
+	"description": "Install PM2 as a service on windows",
+	"main": "src/index.js",
+	"bin": {
+		"pm2-service-install": "bin/pm2-service-install",
+		"pm2-service-uninstall": "bin/pm2-service-uninstall"
+	},
+	"scripts": {
+		"lint": "eslint **",
+		"prettier": "prettier ** --write",
+		"start": "node bin/pm2-service-install",
+		"stop": "node bin/pm2-service-uninstall",
+		"test": "node test/integration.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jon-hall/pm2-windows-service.git"
+	},
+	"keywords": [
+		"pm2",
+		"windows",
+		"service"
+	],
+	"author": "Jon Hall <jon_hall@outlook.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/jon-hall/pm2-windows-service/issues"
+	},
+	"homepage": "https://github.com/jon-hall/pm2-windows-service#readme",
+	"prettier": {
 		"arrowParens": "always",
 		"bracketSpacing": true,
 		"endOfLine": "lf",
@@ -36,32 +39,32 @@
 		"trailingComma": "none",
 		"useTabs": true
 	},
-  "dependencies": {
-    "co": "^4.6.0",
-    "co-event": "^0.1.0",
-    "del": "^5.1.0",
-    "fs-extra": "^9.0.0",
-    "inquirer": "^7.1.0",
-    "is-admin": "^3.0.0",
-    "node-windows": "^0.1.14",
-    "promisify-node": "^0.5.0",
-    "shelljs": "^0.8.3",
-    "yargs": "^15.3.1"
-  },
-  "engines": {
-    "node": ">=4.0.0"
-  },
-  "os": [
-    "win32"
-  ],
-  "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^23.8.2",
-    "eslint-plugin-json": "^2.1.1",
-    "prettier": "2.0.2",
-    "temp": "^0.9.1"
-  }
+	"dependencies": {
+		"co": "^4.6.0",
+		"co-event": "^0.1.0",
+		"del": "^5.1.0",
+		"fs-extra": "^9.0.0",
+		"inquirer": "^7.1.0",
+		"is-admin": "^3.0.0",
+		"node-windows": "^0.1.14",
+		"promisify-node": "^0.5.0",
+		"shelljs": "^0.8.3",
+		"yargs": "^15.3.1"
+	},
+	"engines": {
+		"node": ">=4.0.0"
+	},
+	"os": [
+		"win32"
+	],
+	"devDependencies": {
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb-base": "^14.1.0",
+		"eslint-config-prettier": "^6.10.1",
+		"eslint-plugin-import": "^2.20.2",
+		"eslint-plugin-jest": "^23.8.2",
+		"eslint-plugin-json": "^2.1.1",
+		"prettier": "2.0.2",
+		"temp": "^0.9.1"
+	}
 }
