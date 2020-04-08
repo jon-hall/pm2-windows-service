@@ -1,6 +1,6 @@
 {
 	"name": "@fdawgs/pm2-windows-service",
-	"version": "0.2.1",
+	"version": "1.0.0",
 	"description": "Easily install and uninstall PM2 as a Windows service",
 	"keywords": [
 		"pm2",
