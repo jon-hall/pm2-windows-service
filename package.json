@@ -1,34 +1,31 @@
 {
-	"name": "pm2-windows-service",
+	"name": "@fdawgs/pm2-windows-service",
 	"version": "0.2.1",
-	"description": "Install PM2 as a service on windows",
+	"description": "Install PM2 as Windows service",
+	"keywords": [
+		"pm2",
+		"windows",
+		"service"
+	],
 	"main": "src/index.js",
+	"repository": "git@github.com:Fdawgs/pm2-windows-service.git",
+	"author": "Jon Hall <jon_hall@outlook.com>",
+	"contributors": [
+		"Frazer Smith"
+	],
+	"license": "MIT",
 	"bin": {
 		"pm2-service-install": "bin/pm2-service-install",
 		"pm2-service-uninstall": "bin/pm2-service-uninstall"
 	},
 	"scripts": {
+		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md && prettier CHANGELOG.md --write",
 		"lint": "eslint **",
 		"prettier": "prettier ** --write",
 		"start": "node bin/pm2-service-install",
 		"stop": "node bin/pm2-service-uninstall",
 		"test": "node test/integration.js"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/jon-hall/pm2-windows-service.git"
-	},
-	"keywords": [
-		"pm2",
-		"windows",
-		"service"
-	],
-	"author": "Jon Hall <jon_hall@outlook.com>",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/jon-hall/pm2-windows-service/issues"
-	},
-	"homepage": "https://github.com/jon-hall/pm2-windows-service#readme",
 	"prettier": {
 		"arrowParens": "always",
 		"bracketSpacing": true,
@@ -38,6 +35,25 @@
 		"tabWidth": 4,
 		"trailingComma": "none",
 		"useTabs": true
+	},
+	"engines": {
+		"node": ">=4.0.0"
+	},
+	"os": [
+		"win32"
+	],
+	"devDependencies": {
+		"@commitlint/config-conventional": "^8.3.4",
+		"conventional-changelog-cli": "^2.0.31",
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb-base": "^14.1.0",
+		"eslint-config-prettier": "^6.10.1",
+		"eslint-plugin-import": "^2.20.2",
+		"eslint-plugin-jest": "^23.8.2",
+		"eslint-plugin-json": "^2.1.1",
+		"prettier": "2.0.2",
+		"temp": "^0.9.1",
+		"typescript": "^3.8.3"
 	},
 	"dependencies": {
 		"co": "^4.6.0",
@@ -50,21 +66,5 @@
 		"promisify-node": "^0.5.0",
 		"shelljs": "^0.8.3",
 		"yargs": "^15.3.1"
-	},
-	"engines": {
-		"node": ">=4.0.0"
-	},
-	"os": [
-		"win32"
-	],
-	"devDependencies": {
-		"eslint": "^6.8.0",
-		"eslint-config-airbnb-base": "^14.1.0",
-		"eslint-config-prettier": "^6.10.1",
-		"eslint-plugin-import": "^2.20.2",
-		"eslint-plugin-jest": "^23.8.2",
-		"eslint-plugin-json": "^2.1.1",
-		"prettier": "2.0.2",
-		"temp": "^0.9.1"
 	}
 }
