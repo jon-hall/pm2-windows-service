@@ -62,7 +62,7 @@
 		"fs-extra": "^9.0.0",
 		"inquirer": "^7.1.0",
 		"is-admin": "^3.0.0",
-		"node-windows": "^0.1.14",
+		"node-windows": "1.0.0-beta.1",
 		"promisify-node": "^0.5.0",
 		"shelljs": "^0.8.3",
 		"yargs": "^15.3.1"
