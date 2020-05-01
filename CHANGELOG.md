@@ -1,3 +1,11 @@
+## <small>1.0.1 (2020-05-01)</small>
+
+-   Bump eslint-config-prettier from 6.10.1 to 6.11.0 ([a6d7722](https://github.com/Fdawgs/pm2-windows-service/commit/a6d7722))
+-   Bump prettier from 2.0.4 to 2.0.5 ([b79ed5e](https://github.com/Fdawgs/pm2-windows-service/commit/b79ed5e))
+-   Bump shelljs from 0.8.3 to 0.8.4 ([1c7c126](https://github.com/Fdawgs/pm2-windows-service/commit/1c7c126))
+-   build(deps): bump node-windows from 0.1.14 to 1.0.0 ([ab62493](https://github.com/Fdawgs/pm2-windows-service/commit/ab62493))
+-   docs(readme): fix npm badge link ([9b822c5](https://github.com/Fdawgs/pm2-windows-service/commit/9b822c5))
+
 ## 1.0.0 (2020-04-08)
 
 -   chore: add license file ([002dcf7](https://github.com/Fdawgs/pm2-windows-service/commit/002dcf7))
