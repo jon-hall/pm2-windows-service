@@ -14,6 +14,9 @@
 		"Frazer Smith"
 	],
 	"license": "MIT",
+	"engines": {
+		"node": ">=12.16.3"
+	},
 	"bin": {
 		"pm2-service-install": "bin/pm2-service-install",
 		"pm2-service-uninstall": "bin/pm2-service-uninstall"
@@ -35,9 +38,6 @@
 		"tabWidth": 4,
 		"trailingComma": "none",
 		"useTabs": true
-	},
-	"engines": {
-		"node": ">=4.0.0"
 	},
 	"os": [
 		"win32"
