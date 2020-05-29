@@ -1,3 +1,12 @@
+## <small>1.0.2 (2020-05-29)</small>
+
+-   Bump conventional-changelog-cli from 2.0.31 to 2.0.34 ([cee2e26](https://github.com/Fdawgs/pm2-windows-service/commit/cee2e26))
+-   Bump eslint-plugin-jest from 23.8.2 to 23.13.2 ([fca3bb7](https://github.com/Fdawgs/pm2-windows-service/commit/fca3bb7))
+-   Bump typescript from 3.8.3 to 3.9.3 ([f4876cb](https://github.com/Fdawgs/pm2-windows-service/commit/f4876cb))
+-   build(deps-dev): add promise and jsdoc eslint plugins; update config ([728a038](https://github.com/Fdawgs/pm2-windows-service/commit/728a038))
+-   chore: update gitignore with latest github version ([948a3b2](https://github.com/Fdawgs/pm2-windows-service/commit/948a3b2))
+-   chore(package): increase minimum engine version from 4.0.0 to 12.6.3 ([45c7b26](https://github.com/Fdawgs/pm2-windows-service/commit/45c7b26))
+
 ## <small>1.0.1 (2020-05-01)</small>
 
 -   Bump eslint-config-prettier from 6.10.1 to 6.11.0 ([a6d7722](https://github.com/Fdawgs/pm2-windows-service/commit/a6d7722))
