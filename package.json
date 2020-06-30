@@ -1,6 +1,6 @@
 {
 	"name": "@fdawgs/pm2-windows-service",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Easily install and uninstall PM2 as a Windows service",
 	"keywords": [
 		"pm2",
@@ -23,8 +23,8 @@
 	},
 	"scripts": {
 		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md && prettier CHANGELOG.md --write",
-		"lint": "eslint **",
-		"prettier": "prettier ** --write",
+		"lint": "eslint . --cache --ext js,jsx,ts,tsx",
+		"prettier": "prettier . --write",
 		"start": "node bin/pm2-service-install",
 		"stop": "node bin/pm2-service-uninstall",
 		"test": "node test/integration.js"
@@ -45,24 +45,24 @@
 	"devDependencies": {
 		"@commitlint/config-conventional": "^9.0.1",
 		"conventional-changelog-cli": "^2.0.34",
-		"eslint": "^6.8.0",
-		"eslint-config-airbnb-base": "^14.1.0",
+		"eslint": "^7.3.1",
+		"eslint-config-airbnb-base": "^14.2.0",
 		"eslint-config-prettier": "^6.11.0",
-		"eslint-plugin-import": "^2.20.2",
-		"eslint-plugin-jest": "^23.13.2",
+		"eslint-plugin-import": "^2.22.0",
+		"eslint-plugin-jest": "^23.17.1",
 		"eslint-plugin-jsdoc": "^28.5.1",
 		"eslint-plugin-json": "^2.1.1",
 		"eslint-plugin-promise": "^4.2.1",
 		"prettier": "2.0.5",
 		"temp": "^0.9.1",
-		"typescript": "^3.9.3"
+		"typescript": "^3.9.5"
 	},
 	"dependencies": {
 		"co": "^4.6.0",
 		"co-event": "^0.1.0",
 		"del": "^5.1.0",
-		"fs-extra": "^9.0.0",
-		"inquirer": "^7.1.0",
+		"fs-extra": "^9.0.1",
+		"inquirer": "^7.2.0",
 		"is-admin": "^3.0.0",
 		"node-windows": "1.0.0-beta.1",
 		"promisify-node": "^0.5.0",
