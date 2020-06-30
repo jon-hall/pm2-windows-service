@@ -1,3 +1,17 @@
+## <small>1.0.3 (2020-06-30)</small>
+
+-   chore: create code_of_conduct.md ([78388bb](https://github.com/Fdawgs/pm2-windows-service/commit/78388bb))
+-   chore(dependabot): add assignees ([1164641](https://github.com/Fdawgs/pm2-windows-service/commit/1164641))
+-   chore(scripts): expand coverage of eslint and prettier ([d3c9574](https://github.com/Fdawgs/pm2-windows-service/commit/d3c9574))
+-   Bump @commitlint/config-conventional from 8.3.4 to 9.0.1 ([6d31ca0](https://github.com/Fdawgs/pm2-windows-service/commit/6d31ca0))
+-   Bump eslint-plugin-import from 2.20.2 to 2.22.0 ([d7f3e55](https://github.com/Fdawgs/pm2-windows-service/commit/d7f3e55))
+-   Bump eslint-plugin-jest from 23.13.2 to 23.17.1 ([e33467a](https://github.com/Fdawgs/pm2-windows-service/commit/e33467a))
+-   Bump eslint-plugin-jsdoc from 26.0.0 to 28.5.1 ([85c0fbd](https://github.com/Fdawgs/pm2-windows-service/commit/85c0fbd))
+-   Bump fs-extra from 9.0.0 to 9.0.1 ([15567b3](https://github.com/Fdawgs/pm2-windows-service/commit/15567b3))
+-   Bump inquirer from 7.1.0 to 7.2.0 ([cc0c610](https://github.com/Fdawgs/pm2-windows-service/commit/cc0c610))
+-   Bump typescript from 3.9.3 to 3.9.5 ([d314a21](https://github.com/Fdawgs/pm2-windows-service/commit/d314a21))
+-   Create Dependabot config file ([9390e84](https://github.com/Fdawgs/pm2-windows-service/commit/9390e84))
+
 ## <small>1.0.2 (2020-05-29)</small>
 
 -   Bump conventional-changelog-cli from 2.0.31 to 2.0.34 ([cee2e26](https://github.com/Fdawgs/pm2-windows-service/commit/cee2e26))
