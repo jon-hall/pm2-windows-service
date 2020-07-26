@@ -1,6 +1,6 @@
 # pm2-windows-service
 
-[![GitHub Release](https://img.shields.io/github/release/Fdawgs/pm2-windows-service.svg)](https://github.com/Fdawgs/pm2-windows-service/releases/latest/) [![npm version](https://img.shields.io/npm/v/@fdawgs/pm2-windows-service)](https://www.npmjs.com/package/@fdawgs/pm2-windows-service) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&identifier=253735893)](https://dependabot.com) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![GitHub Release](https://img.shields.io/github/release/Fdawgs/pm2-windows-service.svg)](https://github.com/Fdawgs/pm2-windows-service/releases/latest/) [![npm version](https://img.shields.io/npm/v/@fdawgs/pm2-windows-service)](https://www.npmjs.com/package/@fdawgs/pm2-windows-service) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 > Easily install and uninstall [PM2](https://github.com/Unitech/PM2/) as a Windows service
 
