@@ -43,15 +43,15 @@
 		"win32"
 	],
 	"devDependencies": {
-		"@commitlint/config-conventional": "^9.0.1",
+		"@commitlint/config-conventional": "^9.1.1",
 		"conventional-changelog-cli": "^2.0.34",
-		"eslint": "^7.3.1",
+		"eslint": "^7.5.0",
 		"eslint-config-airbnb-base": "^14.2.0",
 		"eslint-config-prettier": "^6.11.0",
 		"eslint-plugin-import": "^2.22.0",
-		"eslint-plugin-jest": "^23.17.1",
-		"eslint-plugin-jsdoc": "^28.5.1",
-		"eslint-plugin-json": "^2.1.1",
+		"eslint-plugin-jest": "^23.18.2",
+		"eslint-plugin-jsdoc": "^30.0.3",
+		"eslint-plugin-json": "^2.1.2",
 		"eslint-plugin-promise": "^4.2.1",
 		"prettier": "2.0.5",
 		"temp": "^0.9.1"
