@@ -1822,10 +1822,10 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-node-windows@1.0.0-beta.1:
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/node-windows/-/node-windows-1.0.0-beta.1.tgz#a3442389c2981a5f504777172a50c912c5df2e6b"
-  integrity sha512-wWAM7zRvu4ZrBGsEI+7oGcoGr5jEeHgxzdx4DNEFddK/gh1yOsy782nCcShjOZ4Kffy8zDfmCw0Femxvib/5Rw==
+node-windows@1.0.0-beta.4:
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/node-windows/-/node-windows-1.0.0-beta.4.tgz#7d38a0954b87052b58eb4a9c6ef4a2ca1651e185"
+  integrity sha512-KRCV8oDJmoXAvseo3R95QDn0MzgHxRhlWSXrBTY61fdwfxquI8wVQMGMHi8uzfS6sZeFkbUb/NXT/nU1dYnz7w==
   dependencies:
     optimist "~0.6.0"
     xml "0.0.12"
