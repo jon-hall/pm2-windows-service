@@ -1,3 +1,11 @@
+## <small>1.0.4 (2020-07-26)</small>
+
+-   build(deps-dev): bump dev dependencies ([41039ec](https://github.com/Fdawgs/pm2-windows-service/commit/41039ec))
+-   build(deps-dev): remove typescript ([d9ea409](https://github.com/Fdawgs/pm2-windows-service/commit/d9ea409))
+-   build(deps): bump inquirer from 7.2.0 to 7.3.3 ([7a691b0](https://github.com/Fdawgs/pm2-windows-service/commit/7a691b0))
+-   build(deps): bump node-windows from 1.0.0-beta.1 to 1.0.0-beta.4 ([ad748ef](https://github.com/Fdawgs/pm2-windows-service/commit/ad748ef))
+-   build(deps): bump yargs from 15.3.1 to 15.4.1 ([a904ce5](https://github.com/Fdawgs/pm2-windows-service/commit/a904ce5))
+
 ## <small>1.0.3 (2020-06-30)</small>
 
 -   chore: create code_of_conduct.md ([78388bb](https://github.com/Fdawgs/pm2-windows-service/commit/78388bb))
