@@ -1,4 +1,19 @@
-# pm2-windows-service
+# pm2-windows-service [DEPRECATED]
+
+<br />
+<br />
+
+**This package is NO LONGER SUPPORTED OR MAINTAINED**
+
+<br />
+<br />
+
+To run `pm2` on Windows you should now use [`pm2-installer`](https://github.com/jessety/pm2-installer) instead.
+
+<br />
+<br />
+
+## Original docs
 
 Allows easily installing and uninstalling [PM2](https://github.com/Unitech/PM2/) as a service on Windows machines - inspired by [pm2-windows-startup](https://github.com/marklagendijk/node-pm2-windows-startup), and largely achieved using [node-windows](https://github.com/coreybutler/node-windows).
 
